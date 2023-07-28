@@ -1,5 +1,4 @@
-console.log("object");
-let _1nombre = "Juan";
+export let _1nombre = "Juan";
 let apellido = "Perez";
 console.log(_1nombre + " " + apellido);
 //Strings
