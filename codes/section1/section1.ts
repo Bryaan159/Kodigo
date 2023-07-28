@@ -7,7 +7,7 @@ add();
 add();
 
 // Funciones
-function add() {
+export function add() {
     console.log('Linea #', numberOfCards);
     numberOfCards+=1;
 }
