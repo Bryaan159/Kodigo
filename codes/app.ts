@@ -1,31 +1,43 @@
-// console.log("Hello World");
-// let isTired = true;
+export function pedirDato() {
+    const datoIngresado = prompt("Por favor, ingresa un dato:");
 
-// if(isTired === true){
-//     console.log("Yes i want to sleep");
-//     isTired = false;
-// }
-// if(isTired === false){
-//     console.log("No i dont want to sleep");
-//     isTired = true;
-// }
-// console.log('isTired: '+isTired);
-// console.log("Finish");
-// let isHungry = false;
-// if(isHungry){
-//     console.log("Yes i want to eat");
-//     isHungry = false;
-// }else{
-//     console.log("No i dont want to eat");
-//     isHungry = true;
-// }
-console.log("Prueba de if anidado");
-let grade:number = 10;
-if(grade >= 90){
-    console.log("A");
-}else if(grade >=50 && grade <=60){
-    console.log("Tienes un buen rendimiento");
-}else{
-    console.log("Tienes que mejorar");
+    // Comprobamos si datoIngresado no es null antes de utilizarlo
+    if (datoIngresado !== null) {
+        const resultadoID = document.getElementById("resultado");
+        const analisisID = document.getElementById("analisis");
+        // Convertir datoIngresado a número
+        const datoNumerico = parseFloat(datoIngresado);
+        if (resultadoID) {
+            resultadoID.textContent = datoIngresado;
+        }
+
+        if (!isNaN(datoNumerico) && analisisID) {
+            //Declaraciones de variables para las notas
+            const A_PLUS = 100;
+            const A_SCORE = 90;
+            const B_SCORE = 80;
+            const C_SCORE = 70;
+            const D_SCORE = 60; 
+            if (datoNumerico >= A_SCORE) {
+                if (datoNumerico === A_PLUS) {
+                    analisisID.textContent = "A+";
+                }else {
+                    analisisID.textContent = "A";
+                }
+            }else if (datoNumerico >= B_SCORE) {
+                analisisID.textContent = "B";
+            } else if (datoNumerico >= C_SCORE) {
+                analisisID.textContent = "C";
+            } else if (datoNumerico >= D_SCORE) {
+                analisisID.textContent = "D";
+            } else if (datoNumerico < D_SCORE) {
+                analisisID.textContent = "F";
+            } else {
+                console.log("No se ingresó ningún dato.");
+            }
+        }
+    }
 }
-console.log("Fin del programa");
+
+// Llamamos a la función para pedir el dato por pantalla
+pedirDato();
