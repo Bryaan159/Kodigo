@@ -1,26 +1,31 @@
-console.log("object");
-let _1nombre = "Juan";
-let apellido = "Perez";
-console.log(_1nombre + " " + apellido);
-//Strings
-let firstName: string = 'Bryan';
-let lastName: string = 'Hernández';
-let letter = 0;
-for(let i = 0; i <= firstName.length; i++){
-    letter = i;
+// console.log("Hello World");
+// let isTired = true;
+
+// if(isTired === true){
+//     console.log("Yes i want to sleep");
+//     isTired = false;
+// }
+// if(isTired === false){
+//     console.log("No i dont want to sleep");
+//     isTired = true;
+// }
+// console.log('isTired: '+isTired);
+// console.log("Finish");
+// let isHungry = false;
+// if(isHungry){
+//     console.log("Yes i want to eat");
+//     isHungry = false;
+// }else{
+//     console.log("No i dont want to eat");
+//     isHungry = true;
+// }
+console.log("Prueba de if anidado");
+let grade:number = 10;
+if(grade >= 90){
+    console.log("A");
+}else if(grade >=50 && grade <=60){
+    console.log("Tienes un buen rendimiento");
+}else{
+    console.log("Tienes que mejorar");
 }
-let fullName:string = firstName  + " " +lastName;
-console.log(fullName);
-console.log("Cantidad: "+letter);
-//----------
-let number1:number = 10;
-let number2:number = 20;
-console.log(number1 + number2);
-//-----------------------
-let isActive: boolean = true;
-let isRunning: boolean = false;
-let hasKids: boolean = true;
-//------------------------
-console.log('isActive: '+!isActive);
-console.log('isRunning: '+isRunning);
-console.log('hasKids: '+hasKids);
+console.log("Fin del programa");
