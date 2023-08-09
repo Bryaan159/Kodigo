@@ -1,10 +1,6 @@
-//Funciones
-function greet(){
-    console.log("Hello World :v!!!");
-}
-greet();
-
-function addNumber(a:number , b:number){
-    return a+b;
-}
-console.log(addNumber(1,2));
+//variables
+let base:number = 10;
+let limit:number = 2;
+console.log(`Tabla de multiplicar ${base}`);
+import { tableNumber } from "../helpers/mathHelpers";
+tableNumber(limit, base);
