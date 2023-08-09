@@ -1,22 +1,22 @@
 //Interface
-interface Person{
+interface Person {
     name: string;
     age: number;
     isActive: boolean;
 }
 
 //Arreglo de objetos
-let Bryan: Person= {
+let Bryan: Person = {
     name: 'Bryan',
     age: 22,
     isActive: true
 }
-let Carolina:Person = {
+let Carolina: Person = {
     name: 'Carolina',
     age: 27,
     isActive: true
 }
-let Gabriel:Person = {
+let Gabriel: Person = {
     name: 'Gabriel',
     age: 22,
     isActive: false
@@ -34,45 +34,52 @@ let Gabriel:Person = {
 //Explicación de clases
 //Al igual que los objetos, pueden ser representaciones abstracta de cosas
 //Son un modelo a seguir
-class Galleta{
-    bolitas:number;
-    sabor:string;
-    precio:number;
-    fechaCreacion:Date;
+class Galleta {
+    bolitas: number;
+    sabor: string;
+    precio: number;
+    horneado: boolean;
+    decorado: boolean;
+    fechaCreacion: Date;
 
     //Constructor(metodo)
-    constructor(){
-        this.bolitas = 0;
+    constructor() {
+        this.bolitas = 10;
         this.sabor = 'No brand';
+        this.horneado = false;
+        this.decorado = false;
         this.precio = 0;
         this.fechaCreacion = new Date();
     }
-}
 
+    //Metodos
+    hornear() {
+        if (this.horneado) {
+            //Aqui es para confirmar si esta en false
+            console.log("Si estaba horneada entonces la quemaste");
+            //Si esta en flase entonces pongo un return
+            return;
+        }
+        if(this.bolitas <=0){
+            console.log("La galleta no tiene bolitas");
+            return;
+        }
+        
+
+        //Aqui pasar de False a True
+        this.horneado = true;
+        console.log("La galleta ya tiene bolitas");
+        console.log('Horneando');
+    }
+
+    //
+    
+}
 
 let galleta1 = new Galleta();
 
-let galleta2 = new Galleta();
-
 console.log(galleta1);
-console.log(galleta2);
-
-// let galleta2:Galleta = {
-//     bolitas: 50,
-//     sabor: 'Vainilla',
-//     precio: 5,
-//     fechaCreacion: new Date()
-// }
-// let galleta3:Galleta = {
-//     bolitas: 200,
-//     sabor: 'Fresa',
-//     precio: 15,
-//     fechaCreacion: new Date()
-// }
-
-// console.log("Informacion de cada producto");
-// console.log("---------------------------");
-// let snacks = [galleta1, galleta2, galleta3];
-// for(let i=0; i<snacks.length;i++){
-//     console.log('Bolitas:' ,snacks[i].bolitas,'Sabor: ', snacks[i].sabor,'Precio: ' ,snacks[i].precio, 'Fecha:',snacks[i].fechaCreacion.getHours(),':',snacks[i].fechaCreacion.getMinutes(),':',snacks[i].fechaCreacion.getSeconds());
-// }
+console.log("#1-----------------------------");
+galleta1.hornear();
+console.log("-----------------------------");
+console.log(galleta1);
