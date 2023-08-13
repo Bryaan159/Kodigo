@@ -37,6 +37,7 @@ let Gabriel: Person = {
 class Galleta {
     bolitas: number;
     sabor: string;
+    sugar: number;
     precio: number;
     horneado: boolean;
     decorado: boolean;
@@ -46,6 +47,7 @@ class Galleta {
     constructor() {
         this.bolitas = 10;
         this.sabor = 'No brand';
+        this.sugar = 100;
         this.horneado = false;
         this.decorado = false;
         this.precio = 0;
@@ -60,11 +62,11 @@ class Galleta {
             //Si esta en flase entonces pongo un return
             return;
         }
-        if(this.bolitas <=0){
+        if (this.bolitas <= 0) {
             console.log("La galleta no tiene bolitas");
             return;
         }
-        
+
 
         //Aqui pasar de False a True
         this.horneado = true;
@@ -73,7 +75,30 @@ class Galleta {
     }
 
     //
-    
+    fillSugar(cantidad: number) {
+        if (this.sugar >= 100) {
+            console.log("No se puede agregar mas azucar");
+            return;
+        }
+        if (cantidad < 0) {
+            console.log("tiene que ser un numero positivo");
+            return;
+        }
+        if (this.sugar + cantidad > 100) {
+            let auxiliar: number = 100 - this.sugar;
+            let restante: number = cantidad - auxiliar;
+            this.sugar += auxiliar;
+            console.log(`Solo se agrego  ${auxiliar} de azucar, el resto se guardo: ${restante}`);
+            console.log("Cantidad de azucar actual es : " + this.sugar);
+        }
+        else {
+            let restante = 100 - (this.sugar + cantidad);
+            console.log("Debe de agregar más azucar cuanto : " + restante + " para estar a un  100");
+            this.sugar += cantidad;
+
+        }
+    }
+
 }
 
 let galleta1 = new Galleta();
@@ -82,4 +107,7 @@ console.log(galleta1);
 console.log("#1-----------------------------");
 galleta1.hornear();
 console.log("-----------------------------");
+console.log(galleta1)
+console.log("#2-----------------------------");
+galleta1.fillSugar(10);
 console.log(galleta1);
