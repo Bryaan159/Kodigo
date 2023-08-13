@@ -47,9 +47,9 @@ class Galleta {
     constructor() {
         this.bolitas = 10;
         this.sabor = 'No brand';
-        this.sugar = 100;
-        this.horneado = false;
-        this.decorado = false;
+        this.sugar = 10;
+        this.horneado = true;
+        this.decorado = true;
         this.precio = 0;
         this.fechaCreacion = new Date();
     }
@@ -98,6 +98,13 @@ class Galleta {
 
         }
     }
+    vender() {
+        if(this.horneado == false || this.decorado == false || this.sugar < 100){
+            console.log("No se puede vender una galleta sin hornear, sin decorar o sin azucar");
+            return;
+        }
+        console.log("Felicidades vendiste una galleta");
+    }
 
 }
 
@@ -109,5 +116,6 @@ galleta1.hornear();
 console.log("-----------------------------");
 console.log(galleta1)
 console.log("#2-----------------------------");
-galleta1.fillSugar(10);
+galleta1.fillSugar(90);
 console.log(galleta1);
+galleta1.vender();
