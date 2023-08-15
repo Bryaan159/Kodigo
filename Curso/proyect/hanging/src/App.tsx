@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HangImage } from './Components/HangImage'
 import { letters } from './helpers/letters'
 import './App.css'
@@ -10,13 +10,35 @@ function App() {
 
   //La creación de la palabra oculta
   const [word] = useState('COMPUTADORAS');
-  const [hiddeWord] = useState('_ '.repeat(word.length)); 
-
+  const [hiddeWord, setHiddeWord] = useState('_ '.repeat(word.length));
+  const [lose, setLose] = useState(false);
+  const [won, setWon] = useState(false);
 
   //Código para poder hacer un contador
-  const [attempts, seAttempts] = useState(0);
+  const [attempts, seAttempts] = useState(6);
+
+  //Determinar si el jugador si perdio
+  //Explicacion de esste código
+  useEffect(() => {
+    if(attempts >= 9){
+      setLose(true);
+    }
+  }, [attempts]);
+
+
+  //Determinar si el jugador si gano
+  useEffect(() => {
+    const currentHiddenWord = hiddeWord.split(' ').join('');
+    if(word === currentHiddenWord){
+      setWon(true);
+      alert('Ganaste');
+    } 
+  },[hiddeWord]);
+
 
   const checkLetter = (letter: string) => {
+    console.log("Estado de lose: ", lose);
+    if(lose ) return;
     console.log("Letra: ", letter);
     //Posible solución para que el contador no exceda de 9
     // if(attempts >=9){
@@ -24,16 +46,28 @@ function App() {
     // }
 
     //Solución para que el contador solo aumente sino existe la letra
-    
-    if(!word.includes(letter)){
+
+    if (!word.includes(letter)) {
       console.log(`La letra ${letter} no existe en la palabra ${word}`);
-        //Segundo solución para que el contador no exceda de 9
+      //Segundo solución para que el contador no exceda de 9
       seAttempts(Math.min(attempts + 1, 9));
-    }else{
-      console.log(`La letra ${letter} existe en la palabra ${word}`);
+      return;
     }
- 
-    
+
+    //Recorre la palbra y muestre dicha letra
+    //Explicacion de este código
+    const hiddenWordArray = hiddeWord.split(' ');
+    console.log(hiddenWordArray);
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] === letter) {
+        hiddenWordArray[i] = letter;
+      }
+    }
+    setHiddeWord(hiddenWordArray.join(' '));
+
+    //mostar mensaje de gano o perdio
+
+
   }
 
   return (
@@ -48,6 +82,10 @@ function App() {
       {/* Contador de los intentos que se ha hecho para lograr solventar el juego */}
 
       <h3>Intentos: {attempts}</h3>
+
+      {
+        (lose) ? <h2>Perdiste la palabra era: {word}</h2>: ''
+      }
       {
         letters.map(elements => (
           //
@@ -65,6 +103,7 @@ function App() {
             onClick={() => checkLetter(elements)}>{elements}</button>
         ))
       }
+      {/* <h3>Estado: {lose}</h3> */}
 
     </div>
 
