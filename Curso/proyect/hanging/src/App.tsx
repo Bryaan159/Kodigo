@@ -1,27 +1,50 @@
 import { useEffect, useState } from 'react';
 import { HangImage } from './Components/HangImage'
 import { letters } from './helpers/letters'
+import { getRandomWords } from './helpers/getRandomWords';
+import Swal from 'sweetalert2';
 import './App.css'
+
 {/*La función map se utiliza cuando tenemos un array y nosotros queremos transformalo en
 un nuevo array es como si tenemos una caja de juguetes y los queremos pintar en un nuevo color
 hay que guardarlo en una nueva caja*/}
 
 function App() {
 
+  //SweetAlert
+  const losePlayer = () => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'You don´t discover the word!',
+      footer: '<a href="">You can do it. You must play again</a>'
+    })
+  }
+  //Si gano la notificacion
+  const winPlayer = () => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Congratulations!',
+        text: 'You won the game!',
+        footer: '<a href="">Do you want to play again?</a>'
+      })
+  }
+
   //La creación de la palabra oculta
-  const [word] = useState('COMPUTADORAS');
+  const [word, setWord] = useState(getRandomWords());
   const [hiddeWord, setHiddeWord] = useState('_ '.repeat(word.length));
   const [lose, setLose] = useState(false);
   const [won, setWon] = useState(false);
 
   //Código para poder hacer un contador
-  const [attempts, seAttempts] = useState(6);
+  const [attempts, seAttempts] = useState(0);
 
   //Determinar si el jugador si perdio
   //Explicacion de esste código
   useEffect(() => {
-    if(attempts >= 9){
+    if (attempts >= 9) {
       setLose(true);
+      losePlayer();
     }
   }, [attempts]);
 
@@ -29,16 +52,28 @@ function App() {
   //Determinar si el jugador si gano
   useEffect(() => {
     const currentHiddenWord = hiddeWord.split(' ').join('');
-    if(word === currentHiddenWord){
+    if (word === currentHiddenWord) {
       setWon(true);
-      alert('Ganaste');
-    } 
-  },[hiddeWord]);
+      winPlayer();
+    }
+  }, [hiddeWord]);
 
+  //Funcion para reiniciar el juego
+  const newGame = () => {
+    const neWords = getRandomWords();
+    setWord(neWords);
+    setHiddeWord('_ '.repeat(neWords.length));
+    seAttempts(0);
+    setLose(false);
+    setWon(false);
+  }
 
   const checkLetter = (letter: string) => {
     console.log("Estado de lose: ", lose);
-    if(lose ) return;
+    //Si perdio una partida no debe de permitir continuar
+    if (lose) return;
+    //Si gano una partida no debe de permitir continuar
+    if (won) return;
     console.log("Letra: ", letter);
     //Posible solución para que el contador no exceda de 9
     // if(attempts >=9){
@@ -81,11 +116,11 @@ function App() {
 
       {/* Contador de los intentos que se ha hecho para lograr solventar el juego */}
 
-      <h3>Intentos: {attempts}</h3>
+      <h3>Attempts: {attempts}</h3>
 
-      {
-        (lose) ? <h2>Perdiste la palabra era: {word}</h2>: ''
-      }
+      {/* {
+        (lose) ? <h2>Perdiste la palabra era: {word}</h2> : ''
+      } */}
       {
         letters.map(elements => (
           //
@@ -103,7 +138,8 @@ function App() {
             onClick={() => checkLetter(elements)}>{elements}</button>
         ))
       }
-      {/* <h3>Estado: {lose}</h3> */}
+      <br></br>
+      <button onClick={newGame} id="newGame">New Game</button>
 
     </div>
 
